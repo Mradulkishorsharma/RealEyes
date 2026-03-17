@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RealEyes — AI Deepfake Detector</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+    <header>
+        <a class="logo" href="/">
+            <div class="logo-mark">
+                <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/></svg>
+            </div>
+            <span class="logo-text">Real<span>Eyes</span></span>
+        </a>
+        <div id="statusPill" class="status-pill">
+            <span id="statusDot" class="status-dot"></span>
+            <span id="statusText">Connecting to AI...</span>
+        </div>
+    </header>
+
+    <div class="container">
+
+        <section class="hero">
+            <div class="hero-eyebrow">
+                <svg viewBox="0 0 24 24" width="10" height="10" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                REAL AI DEEPFAKE DETECTION
+            </div>
+            <h1>Can you trust<br>what you <em>see?</em></h1>
+            <p>Upload a video or audio file. Our AI analyzes it frame-by-frame using real deepfake models.</p>
+        </section>
+
+        <div class="upload-wrap">
+            <div class="upload-card" id="uploadBox">
+                <div class="upload-icon-wrap">
+                    <svg viewBox="0 0 24 24"><polyline points="16 16 12 12 8 16"/><line x1="12" y1="12" x2="12" y2="21"/><path d="M20.39 18.39A5 5 0 0018 9h-1.26A8 8 0 103 16.3"/></svg>
+                </div>
+                <h3>Drop your file here</h3>
+                <p>Video or audio file — up to 100MB</p>
+                <label class="btn-choose" for="fileInput">
+                    <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                    Choose File
+                </label>
+                <input type="file" id="fileInput" accept=".mp4,.mov,.avi,.mp3,.wav" hidden>
+                <div class="formats-row">
+                    <span class="fmt-tag">MP4</span>
+                    <span class="fmt-tag">MOV</span>
+                    <span class="fmt-tag">AVI</span>
+                    <span class="fmt-tag">MP3</span>
+                    <span class="fmt-tag">WAV</span>
+                </div>
+            </div>
+
+            <div id="selectedFile" class="file-row hidden">
+                <div class="file-thumb">
+                    <svg viewBox="0 0 24 24"><path d="M13 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V9z"/><polyline points="13 2 13 9 20 9"/></svg>
+                </div>
+                <div class="file-meta">
+                    <div class="name" id="fileName">—</div>
+                    <div class="size" id="fileSize">—</div>
+                </div>
+                <button class="btn-analyze" id="analyzeBtn">
+                    <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                    Analyze
+                </button>
+            </div>
+        </div>
+
+        <div id="loadingSection" class="loading-section hidden">
+            <div class="spinner-wrap">
+                <div class="spinner"></div>
+                <div class="spinner-inner"></div>
+            </div>
+            <p>Analyzing with Real AI Model...</p>
+            <p class="sub">This may take 5–30 seconds (CPU mode)</p>
+        </div>
+
+        <div id="resultSection" class="result-card hidden">
+            <div id="dummyWarning" class="result-header">
+                <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                <span>Analysis complete — powered by real AI model</span>
+            </div>
+
+            <div class="result-body">
+                <div id="verdictBox" class="verdict-block">
+                    <div class="verdict-icon" id="verdictIcon"></div>
+                    <div class="verdict-info">
+                        <div class="verdict-label" id="verdictText"></div>
+                        <div class="verdict-sub" id="verdictSub"></div>
+                    </div>
+                    <div class="confidence-badge" id="confidenceBadge"></div>
+                </div>
+
+                <div class="score-section">
+                    <div class="section-label">Confidence breakdown</div>
+                    <div class="score-track">
+                        <div class="score-fill" id="scoreBar"></div>
+                    </div>
+                    <div class="score-labels">
+                        <span>Authentic</span>
+                        <span>Synthetic</span>
+                    </div>
+                </div>
+
+                <div class="meta-grid">
+                    <div class="meta-card">
+                        <div class="label">Frames</div>
+                        <div class="value" id="framesCount">—</div>
+                        <div class="badge">analyzed</div>
+                    </div>
+                    <div class="meta-card">
+                        <div class="label">File type</div>
+                        <div class="value" id="fileTypeVal">—</div>
+                        <div class="badge" id="fileTypeTag">—</div>
+                    </div>
+                    <div class="meta-card">
+                        <div class="label">Model</div>
+                        <div class="value" id="modelUsed">—</div>
+                        <div class="badge">real</div>
+                    </div>
+                </div>
+
+                <div class="actions">
+                    <button class="btn-reset" onclick="resetUI()">↩ Reset</button>
+                    <button class="btn-new" onclick="resetUI()">Analyze Another File →</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="/static/script.js"></script>
+</body>
+</html>
