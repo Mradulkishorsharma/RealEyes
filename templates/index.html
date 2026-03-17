@@ -8,129 +8,231 @@
 </head>
 <body>
 
-    <header>
-        <a class="logo" href="/">
-            <div class="logo-mark">
-                <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/></svg>
-            </div>
-            <span class="logo-text">Real<span>Eyes</span></span>
-        </a>
-        <div id="statusPill" class="status-pill">
-            <span id="statusDot" class="status-dot"></span>
-            <span id="statusText">Connecting to AI...</span>
+<header>
+    <a class="logo" href="/">
+        <div class="logo-mark">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/></svg>
         </div>
-    </header>
+        <span class="logo-text">Real<em>Eyes</em></span>
+    </a>
+    <div id="statusPill" class="pill">
+        <span id="statusDot" class="pill-dot"></span>
+        <span id="statusText">Connecting to AI...</span>
+    </div>
+</header>
 
-    <div class="container">
+<div class="container">
 
-        <section class="hero">
-            <div class="hero-eyebrow">
-                <svg viewBox="0 0 24 24" width="10" height="10" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-                REAL AI DEEPFAKE DETECTION
-            </div>
-            <h1>Can you trust<br>what you <em>see?</em></h1>
-            <p>Upload a video or audio file. Our AI analyzes it frame-by-frame using real deepfake models.</p>
-        </section>
-
-        <div class="upload-wrap">
-            <div class="upload-card" id="uploadBox">
-                <div class="upload-icon-wrap">
-                    <svg viewBox="0 0 24 24"><polyline points="16 16 12 12 8 16"/><line x1="12" y1="12" x2="12" y2="21"/><path d="M20.39 18.39A5 5 0 0018 9h-1.26A8 8 0 103 16.3"/></svg>
-                </div>
-                <h3>Drop your file here</h3>
-                <p>Video or audio file — up to 100MB</p>
-                <label class="btn-choose" for="fileInput">
-                    <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
-                    Choose File
-                </label>
-                <input type="file" id="fileInput" accept=".mp4,.mov,.avi,.mp3,.wav" hidden>
-                <div class="formats-row">
-                    <span class="fmt-tag">MP4</span>
-                    <span class="fmt-tag">MOV</span>
-                    <span class="fmt-tag">AVI</span>
-                    <span class="fmt-tag">MP3</span>
-                    <span class="fmt-tag">WAV</span>
-                </div>
-            </div>
-
-            <div id="selectedFile" class="file-row hidden">
-                <div class="file-thumb">
-                    <svg viewBox="0 0 24 24"><path d="M13 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V9z"/><polyline points="13 2 13 9 20 9"/></svg>
-                </div>
-                <div class="file-meta">
-                    <div class="name" id="fileName">—</div>
-                    <div class="size" id="fileSize">—</div>
-                </div>
-                <button class="btn-analyze" id="analyzeBtn">
-                    <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-                    Analyze
-                </button>
-            </div>
+    <!-- HERO -->
+    <section class="hero">
+        <div class="eyebrow-row">
+            <span class="eyebrow-tick"></span>
+            <span class="eyebrow-txt">Real AI Deepfake Detection</span>
+            <span class="eyebrow-tick r"></span>
         </div>
+        <h1>Can you trust<br>what you <span class="g">see?</span></h1>
+        <p class="hero-p">Upload a video or audio file. Our AI analyzes it frame‑by‑frame using real deepfake detection models.</p>
+    </section>
 
-        <div id="loadingSection" class="loading-section hidden">
-            <div class="spinner-wrap">
-                <div class="spinner"></div>
-                <div class="spinner-inner"></div>
-            </div>
-            <p>Analyzing with Real AI Model...</p>
-            <p class="sub">This may take 5–30 seconds (CPU mode)</p>
-        </div>
-
-        <div id="resultSection" class="result-card hidden">
-            <div id="dummyWarning" class="result-header">
-                <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-                <span>Analysis complete — powered by real AI model</span>
-            </div>
-
-            <div class="result-body">
-                <div id="verdictBox" class="verdict-block">
-                    <div class="verdict-icon" id="verdictIcon"></div>
-                    <div class="verdict-info">
-                        <div class="verdict-label" id="verdictText"></div>
-                        <div class="verdict-sub" id="verdictSub"></div>
-                    </div>
-                    <div class="confidence-badge" id="confidenceBadge"></div>
-                </div>
-
-                <div class="score-section">
-                    <div class="section-label">Confidence breakdown</div>
-                    <div class="score-track">
-                        <div class="score-fill" id="scoreBar"></div>
-                    </div>
-                    <div class="score-labels">
-                        <span>Authentic</span>
-                        <span>Synthetic</span>
-                    </div>
-                </div>
-
-                <div class="meta-grid">
-                    <div class="meta-card">
-                        <div class="label">Frames</div>
-                        <div class="value" id="framesCount">—</div>
-                        <div class="badge">analyzed</div>
-                    </div>
-                    <div class="meta-card">
-                        <div class="label">File type</div>
-                        <div class="value" id="fileTypeVal">—</div>
-                        <div class="badge" id="fileTypeTag">—</div>
-                    </div>
-                    <div class="meta-card">
-                        <div class="label">Model</div>
-                        <div class="value" id="modelUsed">—</div>
-                        <div class="badge">real</div>
-                    </div>
-                </div>
-
-                <div class="actions">
-                    <button class="btn-reset" onclick="resetUI()">↩ Reset</button>
-                    <button class="btn-new" onclick="resetUI()">Analyze Another File →</button>
-                </div>
-            </div>
-        </div>
-
+    <!-- STATS -->
+    <div class="stats-bar">
+        <div class="stat"><div class="stat-n">99<s>%</s></div><div class="stat-k">Accuracy</div></div>
+        <div class="stat"><div class="stat-n">2<s>M+</s></div><div class="stat-k">Files Scanned</div></div>
+        <div class="stat"><div class="stat-n">&lt;30<s>s</s></div><div class="stat-k">Avg. Analysis</div></div>
+        <div class="stat"><div class="stat-n">5<s>+</s></div><div class="stat-k">AI Models</div></div>
     </div>
 
-    <script src="/static/script.js"></script>
+    <!-- UPLOAD -->
+    <div class="upload-wrap">
+        <div class="upload-zone" id="uploadBox">
+            <span class="cbr"></span>
+            <span class="ctr"></span>
+
+            <!-- Eye Scanner SVG -->
+            <div class="eye-wrap">
+                <svg viewBox="0 0 90 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Outer rotating dashed ring -->
+                    <g class="orb1">
+                        <circle cx="45" cy="45" r="42" stroke="rgba(124,97,255,0.18)" stroke-width="1" stroke-dasharray="4 8"/>
+                        <circle cx="45" cy="3" r="3" fill="#7c61ff" opacity="0.8"/>
+                    </g>
+                    <!-- Middle counter-rotating ring -->
+                    <g class="orb2">
+                        <circle cx="45" cy="45" r="34" stroke="rgba(124,97,255,0.12)" stroke-width="1" stroke-dasharray="3 6"/>
+                        <circle cx="45" cy="11" r="2.5" fill="#a78bfa" opacity="0.6"/>
+                    </g>
+                    <!-- Sweep beam -->
+                    <g class="beam">
+                        <line x1="45" y1="45" x2="45" y2="7" stroke="rgba(124,97,255,0.6)" stroke-width="1.2" stroke-linecap="round"/>
+                    </g>
+                    <!-- Static inner circle bg -->
+                    <circle cx="45" cy="45" r="24" fill="rgba(124,97,255,0.07)" stroke="rgba(124,97,255,0.2)" stroke-width="1"/>
+                    <!-- Eye paths -->
+                    <g class="iris">
+                        <path d="M18 45 C18 45 28 30 45 30 C62 30 72 45 72 45 C72 45 62 60 45 60 C28 60 18 45 18 45Z" stroke="rgba(124,97,255,0.5)" stroke-width="1.2" fill="none"/>
+                        <circle cx="45" cy="45" r="9" stroke="rgba(124,97,255,0.7)" stroke-width="1.2" fill="rgba(124,97,255,0.15)"/>
+                        <circle cx="45" cy="45" r="4" fill="#7c61ff" opacity="0.9"/>
+                        <circle cx="43" cy="43" r="1.5" fill="rgba(255,255,255,0.6)"/>
+                    </g>
+                </svg>
+            </div>
+
+            <h3>Drop your file here</h3>
+            <p>Video or audio — up to 100MB</p>
+
+            <label class="btn-pick" for="fileInput">
+                <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                <span>Choose File</span>
+            </label>
+            <input type="file" id="fileInput" accept=".mp4,.mov,.avi,.mp3,.wav" hidden>
+
+            <div class="formats">
+                <span class="fmt">MP4</span>
+                <span class="fmt">MOV</span>
+                <span class="fmt">AVI</span>
+                <span class="fmt">MP3</span>
+                <span class="fmt">WAV</span>
+            </div>
+        </div>
+
+        <!-- Selected file row -->
+        <div id="selectedFile" class="file-row hidden">
+            <div class="file-icon">
+                <svg viewBox="0 0 24 24"><path d="M13 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V9z"/><polyline points="13 2 13 9 20 9"/></svg>
+            </div>
+            <div class="file-meta">
+                <div class="fname" id="fileName">—</div>
+                <div class="fsize" id="fileSize">—</div>
+            </div>
+            <button class="btn-analyze" id="analyzeBtn">
+                <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                Analyze
+            </button>
+        </div>
+    </div>
+
+    <!-- LOADING -->
+    <div id="loadingSection" class="loading-section hidden">
+        <!-- Radar animation -->
+        <div class="radar">
+            <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <!-- Rings -->
+                <circle class="rring" cx="50" cy="50" r="46" stroke="rgba(124,97,255,0.12)" stroke-width="1"/>
+                <circle class="rring" cx="50" cy="50" r="34" stroke="rgba(124,97,255,0.18)" stroke-width="1" style="animation-delay:.4s"/>
+                <circle class="rring" cx="50" cy="50" r="20" stroke="rgba(124,97,255,0.25)" stroke-width="1" style="animation-delay:.8s"/>
+                <!-- Cross-hairs -->
+                <line x1="4" y1="50" x2="96" y2="50" stroke="rgba(124,97,255,0.08)" stroke-width="1"/>
+                <line x1="50" y1="4" x2="50" y2="96" stroke="rgba(124,97,255,0.08)" stroke-width="1"/>
+                <!-- Sweep wedge -->
+                <g class="rsweep">
+                    <path d="M50 50 L50 4 A46 46 0 0 1 95.3 68" fill="rgba(124,97,255,0.08)" stroke="none"/>
+                    <line x1="50" y1="50" x2="50" y2="4" stroke="rgba(124,97,255,0.7)" stroke-width="1.5" stroke-linecap="round"/>
+                </g>
+                <!-- Center dot -->
+                <circle cx="50" cy="50" r="3.5" fill="#7c61ff"/>
+                <circle cx="50" cy="50" r="6" stroke="rgba(124,97,255,0.4)" stroke-width="1" fill="none"/>
+                <!-- Blips -->
+                <circle cx="32" cy="28" r="2" fill="#7c61ff" opacity=".5"/>
+                <circle cx="68" cy="64" r="1.5" fill="#a78bfa" opacity=".4"/>
+                <circle cx="74" cy="35" r="1.5" fill="#7c61ff" opacity=".3"/>
+            </svg>
+        </div>
+        <div class="load-title">Analyzing with Real AI Model...</div>
+        <div class="prog-track"><div class="prog-beam"></div></div>
+        <div class="load-hint">This may take 5–30 seconds (CPU mode)</div>
+    </div>
+
+    <!-- RESULT -->
+    <div id="resultSection" class="result-card hidden">
+        <div id="dummyWarning" class="res-notice">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            <span>Analysis complete — powered by real AI model</span>
+        </div>
+
+        <div class="res-body">
+
+            <!-- Verdict strip -->
+            <div id="verdictBox" class="verdict">
+                <div class="v-stripe"></div>
+                <div class="v-inner">
+                    <div class="v-emoji" id="verdictIcon"></div>
+                    <div class="v-copy">
+                        <div class="v-label" id="verdictText"></div>
+                        <div class="v-desc"  id="verdictSub"></div>
+                    </div>
+                    <div class="v-badge">
+                        <div class="v-num"  id="confidenceBadge"></div>
+                        <div class="v-unit">% Fake</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="sep"></div>
+
+            <!-- Gauge + Bar -->
+            <div class="analysis-row">
+                <div class="gauge-wrap">
+                    <svg viewBox="0 0 140 88" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="gf" x1="0%" y1="0%" x2="100%" y2="0%">
+                                <stop id="gs1" offset="0%" stop-color="#8a1a2f"/>
+                                <stop id="gs2" offset="100%" stop-color="#ff3f5e"/>
+                            </linearGradient>
+                        </defs>
+                        <path class="g-track" d="M12 80 A58 58 0 0 1 128 80"/>
+                        <path class="g-fill"  id="gaugeFill" d="M12 80 A58 58 0 0 1 128 80" stroke="url(#gf)"/>
+                        <text class="g-val" id="gaugeText" x="70" y="72">—</text>
+                    </svg>
+                    <span class="g-lbl">Fake Score</span>
+                </div>
+
+                <div class="bar-wrap">
+                    <div class="bar-hd">
+                        <span class="bar-ttl">Confidence breakdown</span>
+                        <span class="bar-pct" id="barPctLabel">—</span>
+                    </div>
+                    <div class="bar-track">
+                        <div class="bar-fill" id="scoreBar"></div>
+                    </div>
+                    <div class="bar-ends">
+                        <span class="be-l">Authentic</span>
+                        <span class="be-r">Synthetic</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="sep"></div>
+
+            <!-- Meta tiles -->
+            <div class="tiles">
+                <div class="tile">
+                    <div class="t-lbl">Frames</div>
+                    <div class="t-val" id="framesCount">—</div>
+                    <div class="t-tag">analyzed</div>
+                </div>
+                <div class="tile">
+                    <div class="t-lbl">File Type</div>
+                    <div class="t-val" id="fileTypeVal">—</div>
+                    <div class="t-tag" id="fileTypeTag">—</div>
+                </div>
+                <div class="tile">
+                    <div class="t-lbl">Model</div>
+                    <div class="t-val" id="modelUsed">—</div>
+                    <div class="t-tag">real</div>
+                </div>
+            </div>
+
+            <!-- Actions -->
+            <div class="actions-row">
+                <button class="btn-ghost"   onclick="resetUI()">↩ Reset</button>
+                <button class="btn-primary" onclick="resetUI()">Analyze Another File →</button>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+<script src="/static/script.js"></script>
 </body>
 </html>
