@@ -1,9 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RealEyes — AI Deepfake Detector</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
@@ -15,9 +17,15 @@
         </div>
         <span class="logo-text">Real<em>Eyes</em></span>
     </a>
-    <div id="statusPill" class="pill">
-        <span id="statusDot" class="pill-dot"></span>
-        <span id="statusText">Connecting to AI...</span>
+    <div class="header-right">
+        <button id="themeToggle" class="theme-btn" title="Toggle light/dark mode">
+            <svg id="iconMoon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+            <svg id="iconSun"  viewBox="0 0 24 24" style="display:none"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        </button>
+        <div id="statusPill" class="pill">
+            <span id="statusDot" class="pill-dot"></span>
+            <span id="statusText">Connecting…</span>
+        </div>
     </div>
 </header>
 
@@ -31,7 +39,7 @@
             <span class="eyebrow-tick r"></span>
         </div>
         <h1>Can you trust<br>what you <span class="g">see?</span></h1>
-        <p class="hero-p">Upload a video or audio file. Our AI analyzes it frame‑by‑frame using real deepfake detection models.</p>
+        <p class="hero-p">Upload a video or audio file. Our AI analyzes it frame‑by‑frame and generates a tamper-proof blockchain hash for origin tracking.</p>
     </section>
 
     <!-- STATS -->
@@ -47,27 +55,12 @@
         <div class="upload-zone" id="uploadBox">
             <span class="cbr"></span>
             <span class="ctr"></span>
-
-            <!-- Eye Scanner SVG -->
             <div class="eye-wrap">
                 <svg viewBox="0 0 90 90" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <!-- Outer rotating dashed ring -->
-                    <g class="orb1">
-                        <circle cx="45" cy="45" r="42" stroke="rgba(124,97,255,0.18)" stroke-width="1" stroke-dasharray="4 8"/>
-                        <circle cx="45" cy="3" r="3" fill="#7c61ff" opacity="0.8"/>
-                    </g>
-                    <!-- Middle counter-rotating ring -->
-                    <g class="orb2">
-                        <circle cx="45" cy="45" r="34" stroke="rgba(124,97,255,0.12)" stroke-width="1" stroke-dasharray="3 6"/>
-                        <circle cx="45" cy="11" r="2.5" fill="#a78bfa" opacity="0.6"/>
-                    </g>
-                    <!-- Sweep beam -->
-                    <g class="beam">
-                        <line x1="45" y1="45" x2="45" y2="7" stroke="rgba(124,97,255,0.6)" stroke-width="1.2" stroke-linecap="round"/>
-                    </g>
-                    <!-- Static inner circle bg -->
+                    <g class="orb1"><circle cx="45" cy="45" r="42" stroke="rgba(124,97,255,0.18)" stroke-width="1" stroke-dasharray="4 8"/><circle cx="45" cy="3" r="3" fill="#7c61ff" opacity="0.8"/></g>
+                    <g class="orb2"><circle cx="45" cy="45" r="34" stroke="rgba(124,97,255,0.12)" stroke-width="1" stroke-dasharray="3 6"/><circle cx="45" cy="11" r="2.5" fill="#a78bfa" opacity="0.6"/></g>
+                    <g class="beam"><line x1="45" y1="45" x2="45" y2="7" stroke="rgba(124,97,255,0.6)" stroke-width="1.2" stroke-linecap="round"/></g>
                     <circle cx="45" cy="45" r="24" fill="rgba(124,97,255,0.07)" stroke="rgba(124,97,255,0.2)" stroke-width="1"/>
-                    <!-- Eye paths -->
                     <g class="iris">
                         <path d="M18 45 C18 45 28 30 45 30 C62 30 72 45 72 45 C72 45 62 60 45 60 C28 60 18 45 18 45Z" stroke="rgba(124,97,255,0.5)" stroke-width="1.2" fill="none"/>
                         <circle cx="45" cy="45" r="9" stroke="rgba(124,97,255,0.7)" stroke-width="1.2" fill="rgba(124,97,255,0.15)"/>
@@ -76,26 +69,19 @@
                     </g>
                 </svg>
             </div>
-
             <h3>Drop your file here</h3>
             <p>Video or audio — up to 100MB</p>
-
             <label class="btn-pick" for="fileInput">
                 <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
                 <span>Choose File</span>
             </label>
             <input type="file" id="fileInput" accept=".mp4,.mov,.avi,.mp3,.wav" hidden>
-
             <div class="formats">
-                <span class="fmt">MP4</span>
-                <span class="fmt">MOV</span>
-                <span class="fmt">AVI</span>
-                <span class="fmt">MP3</span>
-                <span class="fmt">WAV</span>
+                <span class="fmt">MP4</span><span class="fmt">MOV</span><span class="fmt">AVI</span><span class="fmt">MP3</span><span class="fmt">WAV</span>
             </div>
         </div>
 
-        <!-- Selected file row -->
+        <!-- File row -->
         <div id="selectedFile" class="file-row hidden">
             <div class="file-icon">
                 <svg viewBox="0 0 24 24"><path d="M13 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V9z"/><polyline points="13 2 13 9 20 9"/></svg>
@@ -104,46 +90,55 @@
                 <div class="fname" id="fileName">—</div>
                 <div class="fsize" id="fileSize">—</div>
             </div>
+            <button class="btn-preview" id="previewBtn" title="Preview file">
+                <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            </button>
             <button class="btn-analyze" id="analyzeBtn">
                 <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
                 Analyze
             </button>
         </div>
+
+        <!-- Preview panel -->
+        <div id="previewPanel" class="preview-panel hidden">
+            <div class="preview-header">
+                <span class="preview-label">Preview</span>
+                <button class="preview-close" id="closePreview">✕</button>
+            </div>
+            <video id="videoPreview" class="preview-video hidden" controls></video>
+            <audio id="audioPreview" class="preview-audio hidden" controls></audio>
+        </div>
     </div>
 
     <!-- LOADING -->
     <div id="loadingSection" class="loading-section hidden">
-        <!-- Radar animation -->
         <div class="radar">
             <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <!-- Rings -->
                 <circle class="rring" cx="50" cy="50" r="46" stroke="rgba(124,97,255,0.12)" stroke-width="1"/>
                 <circle class="rring" cx="50" cy="50" r="34" stroke="rgba(124,97,255,0.18)" stroke-width="1" style="animation-delay:.4s"/>
                 <circle class="rring" cx="50" cy="50" r="20" stroke="rgba(124,97,255,0.25)" stroke-width="1" style="animation-delay:.8s"/>
-                <!-- Cross-hairs -->
                 <line x1="4" y1="50" x2="96" y2="50" stroke="rgba(124,97,255,0.08)" stroke-width="1"/>
                 <line x1="50" y1="4" x2="50" y2="96" stroke="rgba(124,97,255,0.08)" stroke-width="1"/>
-                <!-- Sweep wedge -->
                 <g class="rsweep">
                     <path d="M50 50 L50 4 A46 46 0 0 1 95.3 68" fill="rgba(124,97,255,0.08)" stroke="none"/>
                     <line x1="50" y1="50" x2="50" y2="4" stroke="rgba(124,97,255,0.7)" stroke-width="1.5" stroke-linecap="round"/>
                 </g>
-                <!-- Center dot -->
                 <circle cx="50" cy="50" r="3.5" fill="#7c61ff"/>
                 <circle cx="50" cy="50" r="6" stroke="rgba(124,97,255,0.4)" stroke-width="1" fill="none"/>
-                <!-- Blips -->
                 <circle cx="32" cy="28" r="2" fill="#7c61ff" opacity=".5"/>
                 <circle cx="68" cy="64" r="1.5" fill="#a78bfa" opacity=".4"/>
                 <circle cx="74" cy="35" r="1.5" fill="#7c61ff" opacity=".3"/>
             </svg>
         </div>
-        <div class="load-title">Analyzing with Real AI Model...</div>
+        <div class="load-title">Analyzing with Real AI Model…</div>
+        <div class="load-stage" id="loadStage">Extracting frames…</div>
         <div class="prog-track"><div class="prog-beam"></div></div>
         <div class="load-hint">This may take 5–30 seconds (CPU mode)</div>
     </div>
 
     <!-- RESULT -->
     <div id="resultSection" class="result-card hidden">
+
         <div id="dummyWarning" class="res-notice">
             <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
             <span>Analysis complete — powered by real AI model</span>
@@ -151,7 +146,7 @@
 
         <div class="res-body">
 
-            <!-- Verdict strip -->
+            <!-- Verdict -->
             <div id="verdictBox" class="verdict">
                 <div class="v-stripe"></div>
                 <div class="v-inner">
@@ -167,8 +162,6 @@
                 </div>
             </div>
 
-            <div class="sep"></div>
-
             <!-- Gauge + Bar -->
             <div class="analysis-row">
                 <div class="gauge-wrap">
@@ -180,28 +173,152 @@
                             </linearGradient>
                         </defs>
                         <path class="g-track" d="M12 80 A58 58 0 0 1 128 80"/>
-                        <path class="g-fill"  id="gaugeFill" d="M12 80 A58 58 0 0 1 128 80" stroke="url(#gf)"/>
+                        <path class="g-fill" id="gaugeFill" d="M12 80 A58 58 0 0 1 128 80" stroke="url(#gf)"/>
                         <text class="g-val" id="gaugeText" x="70" y="72">—</text>
                     </svg>
                     <span class="g-lbl">Fake Score</span>
                 </div>
-
                 <div class="bar-wrap">
                     <div class="bar-hd">
                         <span class="bar-ttl">Confidence breakdown</span>
                         <span class="bar-pct" id="barPctLabel">—</span>
                     </div>
-                    <div class="bar-track">
-                        <div class="bar-fill" id="scoreBar"></div>
-                    </div>
-                    <div class="bar-ends">
-                        <span class="be-l">Authentic</span>
-                        <span class="be-r">Synthetic</span>
-                    </div>
+                    <div class="bar-track"><div class="bar-fill" id="scoreBar"></div></div>
+                    <div class="bar-ends"><span class="be-l">Authentic</span><span class="be-r">Synthetic</span></div>
                 </div>
             </div>
 
             <div class="sep"></div>
+
+            <!-- Frame Chart -->
+            <div id="frameChartSection" class="chart-section hidden">
+                <div class="chart-header">
+                    <div class="chart-title-wrap">
+                        <span class="chart-title">Frame-by-Frame Analysis</span>
+                        <span class="chart-sub" id="chartSubLabel">—</span>
+                    </div>
+                    <div class="chart-legend">
+                        <span class="leg-item fake-leg"><span class="leg-dot"></span>Fake</span>
+                        <span class="leg-item real-leg"><span class="leg-dot"></span>Real</span>
+                        <span class="leg-item avg-leg"><span class="leg-line"></span>Avg</span>
+                    </div>
+                </div>
+                <div class="chart-container">
+                    <canvas id="frameChart"></canvas>
+                    <div class="chart-tooltip" id="chartTooltip"></div>
+                </div>
+                <div class="chart-footer">
+                    <span class="chart-foot-item" id="chartMaxFake">Peak fake: —</span>
+                    <span class="chart-foot-item" id="chartMinFake">Peak real: —</span>
+                    <span class="chart-foot-item" id="chartDuration">Duration: —</span>
+                </div>
+            </div>
+
+            <div class="sep" id="chartSep" style="display:none"></div>
+
+            <!-- ═══ BLOCKCHAIN HASH SECTION ═══ -->
+            <div id="blockchainSection" class="blockchain-section hidden">
+
+                <div class="bc-header">
+                    <div class="bc-title-row">
+                        <div class="bc-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="2" y="7" width="6" height="6" rx="1.5"/>
+                                <rect x="9" y="7" width="6" height="6" rx="1.5"/>
+                                <rect x="16" y="7" width="6" height="6" rx="1.5"/>
+                                <line x1="8" y1="10" x2="9" y2="10"/>
+                                <line x1="15" y1="10" x2="16" y2="10"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <div class="bc-title">Blockchain Origin Record</div>
+                            <div class="bc-sub">SHA-256 fingerprint registered — tamper-evident &amp; immutable</div>
+                        </div>
+                    </div>
+                    <div class="bc-badge">
+                        <span class="bc-badge-dot"></span>Confirmed
+                    </div>
+                </div>
+
+                <!-- Hash display -->
+                <div class="bc-hash-wrap">
+                    <div class="bc-hash-label">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 7 4 4 20 4 20 7"/><line x1="9" y1="20" x2="15" y2="20"/><line x1="12" y1="4" x2="12" y2="20"/></svg>
+                        SHA-256 Hash
+                    </div>
+                    <div class="bc-hash-row">
+                        <code class="bc-hash-code" id="hashValue">—</code>
+                        <button class="bc-copy-btn" id="copyHashBtn" title="Copy hash">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Hash generation animation overlay (shows while computing) -->
+                <div id="hashAnimWrap" class="hash-anim-wrap hidden">
+                    <div class="hash-anim-text" id="hashAnimText">Computing SHA-256…</div>
+                    <div class="hash-anim-bar"><div class="hash-anim-fill"></div></div>
+                </div>
+
+                <!-- Metadata grid -->
+                <div class="bc-meta-grid">
+                    <div class="bc-meta-item">
+                        <div class="bc-meta-lbl">Block ID</div>
+                        <div class="bc-meta-val mono" id="bcBlockId">—</div>
+                    </div>
+                    <div class="bc-meta-item">
+                        <div class="bc-meta-lbl">Registered At</div>
+                        <div class="bc-meta-val mono" id="bcTimestamp">—</div>
+                    </div>
+                    <div class="bc-meta-item">
+                        <div class="bc-meta-lbl">Chain</div>
+                        <div class="bc-meta-val">RealEyes-v1</div>
+                    </div>
+                    <div class="bc-meta-item">
+                        <div class="bc-meta-lbl">Status</div>
+                        <div class="bc-meta-val bc-confirmed" id="bcStatus">Pending…</div>
+                    </div>
+                </div>
+
+                <!-- Visual blockchain chain -->
+                <div class="bc-chain-visual">
+                    <div class="bc-chain-node confirmed">
+                        <div class="bcn-label">Genesis</div>
+                        <div class="bcn-hash" id="bcGenesisHash">0x0000…0001</div>
+                    </div>
+                    <div class="bc-chain-arrow">
+                        <div class="bc-chain-pulse"></div>
+                        <svg viewBox="0 0 10 14" width="10" height="14"><path d="M1 1l8 6-8 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
+                    </div>
+                    <div class="bc-chain-node confirmed">
+                        <div class="bcn-label">Prev Block</div>
+                        <div class="bcn-hash" id="bcPrevHash">0xa3f1…9c2e</div>
+                    </div>
+                    <div class="bc-chain-arrow">
+                        <div class="bc-chain-pulse"></div>
+                        <svg viewBox="0 0 10 14" width="10" height="14"><path d="M1 1l8 6-8 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
+                    </div>
+                    <div class="bc-chain-node current" id="bcCurrentNode">
+                        <div class="bcn-label">This File</div>
+                        <div class="bcn-hash" id="bcShortHash">Computing…</div>
+                    </div>
+                    <div class="bc-chain-arrow faded">
+                        <div class="bc-chain-pulse slow"></div>
+                        <svg viewBox="0 0 10 14" width="10" height="14"><path d="M1 1l8 6-8 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
+                    </div>
+                    <div class="bc-chain-node pending">
+                        <div class="bcn-label">Next…</div>
+                        <div class="bcn-hash">Awaiting</div>
+                    </div>
+                </div>
+
+                <div class="bc-note">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                    <span>This SHA-256 hash uniquely fingerprints this file's content. Any modification — even a single pixel — produces a completely different hash, making tampering instantly detectable without needing the original.</span>
+                </div>
+            </div>
+
+            <div class="sep" id="bcSep" style="display:none"></div>
 
             <!-- Meta tiles -->
             <div class="tiles">
@@ -225,13 +342,159 @@
             <!-- Actions -->
             <div class="actions-row">
                 <button class="btn-ghost"   onclick="resetUI()">↩ Reset</button>
-                <button class="btn-primary" onclick="resetUI()">Analyze Another File →</button>
+                <button class="btn-primary" onclick="resetUI()">Analyze Another →</button>
             </div>
 
         </div>
     </div>
 
-</div>
+</div><!-- /container -->
+
+
+<!-- ═══════════════════════════════════════
+     BLOG / IMPACT SECTION
+════════════════════════════════════════ -->
+<section class="blog-section">
+    <div class="blog-inner">
+
+        <div class="eyebrow-row" style="margin-bottom:20px">
+            <span class="eyebrow-tick"></span>
+            <span class="eyebrow-txt">Knowledge &amp; Impact</span>
+            <span class="eyebrow-tick r"></span>
+        </div>
+        <h2 class="section-title">Why Deepfake Detection<br><span class="g">Matters Now</span></h2>
+        <p class="section-sub">As synthetic media grows exponentially, tools like RealEyes are becoming essential infrastructure for a trustworthy digital world.</p>
+
+        <!-- Impact numbers -->
+        <div class="impact-bar">
+            <div class="impact-stat">
+                <div class="impact-n">500<span>%</span></div>
+                <div class="impact-k">Rise in deepfakes since 2022</div>
+            </div>
+            <div class="impact-div"></div>
+            <div class="impact-stat">
+                <div class="impact-n">$25<span>B</span></div>
+                <div class="impact-k">Projected deepfake fraud losses by 2027</div>
+            </div>
+            <div class="impact-div"></div>
+            <div class="impact-stat">
+                <div class="impact-n">96<span>%</span></div>
+                <div class="impact-k">Of deepfakes target private individuals</div>
+            </div>
+        </div>
+
+        <!-- Blog grid -->
+        <div class="blog-grid">
+
+            <article class="blog-card featured">
+                <div class="blog-tag">Featured</div>
+                <div class="blog-icon-wrap">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                </div>
+                <h3>How AI Sees Through Synthetic Faces</h3>
+                <p>Modern deepfake detectors analyze micro-inconsistencies invisible to the human eye — blinking artifacts, unnatural skin textures, and lighting gradient mismatches that GAN-generated faces consistently produce. Our model processes every frame independently, building a statistical fingerprint of authenticity.</p>
+                <div class="blog-footer">
+                    <span class="blog-read">5 min read</span>
+                    <span class="blog-cat">Technology</span>
+                </div>
+            </article>
+
+            <article class="blog-card">
+                <div class="blog-tag">Security</div>
+                <div class="blog-icon-wrap">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                </div>
+                <h3>Blockchain Hashing: The Future of Media Provenance</h3>
+                <p>SHA-256 creates an unbreakable link between a file and its origin. Once a video is scanned and its hash registered, any modification — even a single bit flip — produces a completely different hash, making tampering immediately detectable without needing the original file.</p>
+                <div class="blog-footer">
+                    <span class="blog-read">4 min read</span>
+                    <span class="blog-cat">Blockchain</span>
+                </div>
+            </article>
+
+            <article class="blog-card">
+                <div class="blog-tag">Society</div>
+                <div class="blog-icon-wrap">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+                </div>
+                <h3>The Human Cost of Synthetic Misinformation</h3>
+                <p>From political disinformation to non-consensual intimate imagery, deepfakes cause real-world harm at scale. Detection tools aren't just software — they're critical infrastructure protecting democratic discourse, personal reputation, and public trust in visual media.</p>
+                <div class="blog-footer">
+                    <span class="blog-read">6 min read</span>
+                    <span class="blog-cat">Impact</span>
+                </div>
+            </article>
+
+            <article class="blog-card">
+                <div class="blog-tag">Research</div>
+                <div class="blog-icon-wrap">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+                </div>
+                <h3>Frame-Level Analysis vs Whole-Video Models</h3>
+                <p>Analyzing videos frame-by-frame allows detection of localized manipulation — a single swapped face in an otherwise genuine video. Our approach samples at 2 FPS, balancing detection accuracy with processing speed even on CPU hardware.</p>
+                <div class="blog-footer">
+                    <span class="blog-read">3 min read</span>
+                    <span class="blog-cat">Research</span>
+                </div>
+            </article>
+
+            <article class="blog-card">
+                <div class="blog-tag">Guide</div>
+                <div class="blog-icon-wrap">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                </div>
+                <h3>What To Do If You Find a Deepfake of You</h3>
+                <p>Discovering a synthetic video using your likeness is distressing. Document the hash, report to the platform, preserve evidence with timestamps, and contact digital rights organizations. RealEyes generates tamper-proof evidence for legal proceedings.</p>
+                <div class="blog-footer">
+                    <span class="blog-read">4 min read</span>
+                    <span class="blog-cat">Guide</span>
+                </div>
+            </article>
+
+            <article class="blog-card">
+                <div class="blog-tag">Future</div>
+                <div class="blog-icon-wrap">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                </div>
+                <h3>What's Next: Real-Time Detection &amp; C2PA Standards</h3>
+                <p>The Coalition for Content Provenance and Authenticity (C2PA) is building open standards for media signing. Combined with real-time detection APIs, the next generation will embed authenticity certificates directly into video files at the moment of capture.</p>
+                <div class="blog-footer">
+                    <span class="blog-read">5 min read</span>
+                    <span class="blog-cat">Future</span>
+                </div>
+            </article>
+
+        </div>
+
+        <!-- CTA -->
+        <div class="blog-cta">
+            <div class="blog-cta-inner">
+                <div class="blog-cta-copy">
+                    <h3>Ready to verify your media?</h3>
+                    <p>Upload any video or audio file. Your result is instant, private, and blockchain-secured.</p>
+                </div>
+                <a href="#" onclick="window.scrollTo({top:0,behavior:'smooth'}); return false;" class="blog-cta-btn">
+                    Start Analyzing →
+                </a>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+    <div class="footer-inner">
+        <div class="footer-logo">
+            <div class="logo-mark" style="width:32px;height:32px;border-radius:9px;">
+                <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/></svg>
+            </div>
+            <span class="logo-text" style="font-size:1rem;">Real<em>Eyes</em></span>
+        </div>
+        <p class="footer-copy">Built to protect truth in the age of synthetic media. Open-source AI deepfake detection with blockchain provenance.</p>
+        <p class="footer-legal">© 2025 RealEyes. For research and informational use. Results are probabilistic, not absolute legal determinations.</p>
+    </div>
+</footer>
 
 <script src="/static/script.js"></script>
 </body>
